@@ -1,0 +1,13 @@
+{
+  "leading_validation_candidate": "RF",
+  "thresholds_selected_on": "validation_only",
+  "locked_thresholds": {
+    "RF": 0.66,
+    "SVM": 0.76,
+    "XGBoost": 0.51,
+    "1D-CNN": 0.44,
+    "Hybrid CNN": 0.5
+  },
+  "test_used_for_selection": false,
+  "clinical_scoring_model": false
+}
