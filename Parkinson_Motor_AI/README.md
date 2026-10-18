@@ -1,5 +1,4 @@
-# PADS Motor Assessment ML — THREE MODELS (RF, SVM, XGBoost)
-
+# PADS Motor Assessment ML
 **Purpose:** Preliminary **PD vs Healthy** classification on publicly available PADS wrist movement recordings, not direct 0–4 TS/RS/BS/GI labels. This does not modify your physical device or replace the previous developer's equations.
 
 ## A. Data sources and compatibility
