@@ -1,0 +1,31 @@
+# Python virtual environment
+.venv/
+venv/
+env/
+
+# Python cache and tooling files
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# Jupyter temporary files
+.ipynb_checkpoints/
+
+# Dataset archives and extracted data
+handpd_dataset.zip
+handpd_dataset/
+Data/
+
+# Generated model files
+model/
+models/
+*.keras
+*.h5
+
+# Local logs and OS files
+*.log
+.DS_Store
+Thumbs.db
