@@ -1,0 +1,101 @@
+================================================================================
+MODEL SELECTION JUSTIFICATION — RANDOM FOREST FOR PARKINSON'S DISEASE DETECTION
+================================================================================
+
+EXPERIMENT SETUP
+────────────────
+• 3 candidate models:  SVM (RBF kernel), Random Forest (200 trees), MLP Neural Network (64×32)
+• 23 acoustic features: voice quality (jitter, shimmer, HNR), spectral (MFCCs, centroid),
+  and prosodic (pitch, speech rate) features extracted from voice recordings
+• Validation:          5-Fold Stratified Cross-Validation + 80/20 holdout test
+• Selection criteria:  Primary — CV F1-Score; Secondary — Recall (clinical safety)
+
+CROSS-VALIDATION RESULTS (5-Fold Stratified)
+─────────────────────────────────────────────
+Model               Accuracy        Precision       Recall          F1-Score        ROC-AUC
+Random Forest       93.30 ±0.89%    94.57 ±1.66%    91.79 ±3.31%    93.09 ±1.04%    98.52 ±0.64%
+SVM (RBF)           87.13 ±3.65%    91.24 ±4.01%    81.79 ±4.13%    86.24 ±3.92%    93.65 ±2.67%
+MLP Neural Net      70.53 ±8.05%    72.80 ±8.73%    63.93 ±9.54%    68.05 ±9.22%    78.15 ±9.49%
+
+HOLDOUT TEST RESULTS (80/20 Split, N_test=114)
+───────────────────────────────────────────────
+Model               Accuracy    Recall      F1-Score    ROC-AUC     FN (Missed PD)  FP (False Alarm)
+Random Forest       92.98%      94.64%      92.98%      98.61%      3               5
+SVM (RBF)           93.86%      92.86%      93.69%      98.58%      4               3
+MLP Neural Net      74.56%      82.14%      76.03%      80.11%      10              19
+
+WHY RANDOM FOREST WAS SELECTED
+───────────────────────────────
+
+1. HIGHEST CROSS-VALIDATION F1-SCORE (93.09%)
+   The F1-score harmonically balances precision and recall, making it the most
+   appropriate primary metric for medical screening where both false positives
+   and false negatives carry clinical cost. Random Forest's 93.09% CV F1 is
+   6.85 percentage points higher than SVM (86.24%) and 25.04 points higher
+   than MLP (68.05%).
+
+2. BEST CLINICAL SENSITIVITY / RECALL (91.79% CV, 94.64% holdout)
+   In Parkinson's screening, a false negative (missing a PD patient) is far more
+   dangerous than a false positive (unnecessary follow-up). Random Forest achieved:
+   • CV Recall:  91.79% (vs SVM 81.79%, MLP 63.93%)
+   • Holdout FN: Only 3 missed PD cases (vs SVM 4, MLP 10)
+   This makes RF the safest model from a clinical decision standpoint.
+
+3. MOST STABLE GENERALIZATION (±0.89% accuracy std)
+   Random Forest exhibited the lowest cross-validation variance across ALL metrics:
+   • Accuracy std:  ±0.89% (vs SVM ±3.65%, MLP ±8.05%)
+   • F1 std:        ±1.04% (vs SVM ±3.92%, MLP ±9.22%)
+   • ROC-AUC std:   ±0.64% (vs SVM ±2.67%, MLP ±9.49%)
+   Low variance indicates the model generalizes reliably to unseen voice recordings
+   and is not sensitive to the specific train/test partition — essential for
+   deployment in diverse clinical populations.
+
+4. HIGHEST ROC-AUC (98.52%)
+   The area under the ROC curve measures the model's ability to separate
+   PD-positive and healthy classes across all probability thresholds. RF's
+   98.52% indicates near-perfect discriminative power.
+
+5. ROBUSTNESS TO FEATURE SCALE AND MISSING DATA
+   Unlike SVM and MLP which require feature standardization (StandardScaler),
+   Random Forest is a tree-based ensemble that is inherently scale-invariant.
+   This means:
+   • No preprocessing assumptions are imposed on new, unseen voice recordings
+   • The model gracefully handles the mixed-scale nature of acoustic features
+     (e.g., Hz-scale pitch vs. dB-scale HNR vs. unitless MFCCs)
+   • It naturally handles missing values through median imputation without
+     distortion from scaling artifacts
+
+6. INTERPRETABILITY VIA FEATURE IMPORTANCE
+   Random Forest provides built-in feature importance scores (Gini importance),
+   enabling clinicians and researchers to understand which vocal biomarkers
+   (jitter, shimmer, MFCC coefficients, etc.) contribute most to a PD
+   prediction — critical for clinical trust and regulatory transparency.
+   SVM (RBF kernel) and MLP are comparatively opaque.
+
+WHY NOT SVM?
+────────────
+While SVM achieved the highest *holdout* accuracy (93.86%), its CV performance
+tells a different story: 87.13% accuracy with ±3.65% std — significantly less
+stable. The holdout result likely benefits from a favorable random split. SVM's
+CV recall of 81.79% is ~10 points lower than RF, meaning it misses more PD
+patients across different data partitions. SVM also requires feature scaling
+and offers limited interpretability with an RBF kernel.
+
+WHY NOT MLP?
+────────────
+The MLP Neural Network performed substantially worse across every metric,
+with high variance (±8.05% accuracy std). With only ~569 samples, a neural
+network lacks the data volume to learn robust representations. It missed
+10 PD patients on holdout (vs RF's 3) and produced 19 false alarms (vs RF's 5).
+This is clinically unacceptable and indicates severe overfitting/underfitting.
+
+CONCLUSION
+──────────
+Random Forest provides the optimal balance of:
+ [+] Highest discriminative performance (F1, ROC-AUC)
+ [+] Best clinical safety (highest recall, fewest missed diagnoses)
+ [+] Most reliable generalization (lowest variance across folds)
+ [+] Practical deployment advantages (no scaling, interpretable)
+
+It is the clear choice for this Parkinson's voice-based screening system.
+================================================================================

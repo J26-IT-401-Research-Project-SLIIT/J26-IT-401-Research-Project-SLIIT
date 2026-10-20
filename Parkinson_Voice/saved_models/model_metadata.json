@@ -1,0 +1,187 @@
+{
+  "feature_columns": [
+    "duration_sec",
+    "Pitch_mean_Hz",
+    "Pitch_std_Hz",
+    "Jitter_local",
+    "Shimmer_local",
+    "HNR_dB",
+    "Voice_Ratio",
+    "Speech_Rate_proxy",
+    "Spectral_Centroid",
+    "Spectral_Bandwidth",
+    "Zero_Crossing_Rate",
+    "MFCC0",
+    "MFCC1",
+    "MFCC2",
+    "MFCC3",
+    "MFCC4",
+    "MFCC5",
+    "MFCC6",
+    "MFCC7",
+    "MFCC8",
+    "MFCC9",
+    "MFCC10",
+    "MFCC11",
+    "MFCC12"
+  ],
+  "test_size": 0.2,
+  "random_state": 42,
+  "models": {
+    "svm": {
+      "artifact_file": "svm_model.joblib",
+      "accuracy": 0.9385964912280702,
+      "precision": 0.9454545454545454,
+      "recall": 0.9285714285714286,
+      "specificity": 0.9482758620689655,
+      "f1_score": 0.9369369369369369,
+      "roc_auc": 0.9858374384236454,
+      "confusion_matrix": [
+        [
+          55,
+          3
+        ],
+        [
+          4,
+          52
+        ]
+      ],
+      "false_negatives": 4,
+      "false_positives": 3,
+      "classification_report": {
+        "Healthy": {
+          "precision": 0.9322033898305084,
+          "recall": 0.9482758620689655,
+          "f1-score": 0.9401709401709402,
+          "support": 58.0
+        },
+        "Parkinson's": {
+          "precision": 0.9454545454545454,
+          "recall": 0.9285714285714286,
+          "f1-score": 0.9369369369369369,
+          "support": 56.0
+        },
+        "accuracy": 0.9385964912280702,
+        "macro avg": {
+          "precision": 0.938828967642527,
+          "recall": 0.9384236453201971,
+          "f1-score": 0.9385539385539385,
+          "support": 114.0
+        },
+        "weighted avg": {
+          "precision": 0.9387127294352985,
+          "recall": 0.9385964912280702,
+          "f1-score": 0.9385823070033595,
+          "support": 114.0
+        }
+      }
+    },
+    "random_forest": {
+      "artifact_file": "random_forest_model.joblib",
+      "accuracy": 0.9298245614035088,
+      "precision": 0.9137931034482759,
+      "recall": 0.9464285714285714,
+      "specificity": 0.9137931034482759,
+      "f1_score": 0.9298245614035088,
+      "roc_auc": 0.9861453201970444,
+      "confusion_matrix": [
+        [
+          53,
+          5
+        ],
+        [
+          3,
+          53
+        ]
+      ],
+      "false_negatives": 3,
+      "false_positives": 5,
+      "classification_report": {
+        "Healthy": {
+          "precision": 0.9464285714285714,
+          "recall": 0.9137931034482759,
+          "f1-score": 0.9298245614035088,
+          "support": 58.0
+        },
+        "Parkinson's": {
+          "precision": 0.9137931034482759,
+          "recall": 0.9464285714285714,
+          "f1-score": 0.9298245614035088,
+          "support": 56.0
+        },
+        "accuracy": 0.9298245614035088,
+        "macro avg": {
+          "precision": 0.9301108374384237,
+          "recall": 0.9301108374384237,
+          "f1-score": 0.9298245614035088,
+          "support": 114.0
+        },
+        "weighted avg": {
+          "precision": 0.9303971134733385,
+          "recall": 0.9298245614035088,
+          "f1-score": 0.9298245614035088,
+          "support": 114.0
+        }
+      }
+    },
+    "mlp_neural_network": {
+      "artifact_file": "mlp_neural_network_model.joblib",
+      "accuracy": 0.7456140350877193,
+      "precision": 0.7076923076923077,
+      "recall": 0.8214285714285714,
+      "specificity": 0.6724137931034483,
+      "f1_score": 0.7603305785123967,
+      "roc_auc": 0.8011083743842364,
+      "confusion_matrix": [
+        [
+          39,
+          19
+        ],
+        [
+          10,
+          46
+        ]
+      ],
+      "false_negatives": 10,
+      "false_positives": 19,
+      "classification_report": {
+        "Healthy": {
+          "precision": 0.7959183673469388,
+          "recall": 0.6724137931034483,
+          "f1-score": 0.7289719626168224,
+          "support": 58.0
+        },
+        "Parkinson's": {
+          "precision": 0.7076923076923077,
+          "recall": 0.8214285714285714,
+          "f1-score": 0.7603305785123967,
+          "support": 56.0
+        },
+        "accuracy": 0.7456140350877193,
+        "macro avg": {
+          "precision": 0.7518053375196232,
+          "recall": 0.7469211822660098,
+          "f1-score": 0.7446512705646096,
+          "support": 114.0
+        },
+        "weighted avg": {
+          "precision": 0.7525792503236112,
+          "recall": 0.7456140350877193,
+          "f1-score": 0.7443761949865781,
+          "support": 114.0
+        }
+      }
+    }
+  },
+  "best_model": {
+    "model_name": "random_forest",
+    "artifact_file": "best_model.joblib",
+    "rationale": "'random_forest' was selected as the best model because it demonstrated the highest 5-Fold Cross-Validation performance (F1: 93.09%, Accuracy: 93.30%, ROC-AUC: 98.52%) with exceptional generalization stability (+/- 0.89% std). Clinically, it achieved the highest sensitivity/recall (91.79%), minimizing critical false negatives (missed Parkinson's diagnoses), outperforming other candidates on both tabular acoustic non-linearities and out-of-fold generalization.",
+    "cv_metrics": {
+      "f1_percent": 93.09,
+      "recall_percent": 91.79,
+      "accuracy_percent": 93.3,
+      "roc_auc_percent": 98.52
+    }
+  }
+}

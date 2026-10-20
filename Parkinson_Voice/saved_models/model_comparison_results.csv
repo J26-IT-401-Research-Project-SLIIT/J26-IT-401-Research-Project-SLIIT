@@ -1,0 +1,4 @@
+Model,Accuracy,Precision,Recall (Sens),Specificity,F1-score,ROC-AUC,FN (Missed PD),FP (False Alarm)
+svm,0.9386,0.9455,0.9286,0.9483,0.9369,0.9858,4,3
+random_forest,0.9298,0.9138,0.9464,0.9138,0.9298,0.9861,3,5
+mlp_neural_network,0.7456,0.7077,0.8214,0.6724,0.7603,0.8011,10,19
