@@ -1,0 +1,47 @@
+{
+  "name": "PP1_Public_Reference_Informed_Synthetic_v2",
+  "version": "2.0",
+  "sessions": 200,
+  "synthetic_healthy_like": 100,
+  "synthetic_symptom_pattern_like": 100,
+  "sensor_csv_files": 800,
+  "sampling_hz": 100,
+  "durations_s": {
+    "TS": 10,
+    "BS": 10,
+    "RS": 10,
+    "GI": 180
+  },
+  "group_profiles": "simulated profiles, not real diagnoses",
+  "clinical_0_4_ground_truth": false,
+  "MPS_is_PD_probability": false,
+  "gait_reference": {
+    "source": "user-provided GI_Wrist_Features_51_Participants.csv; includes wear-gait-derived measures",
+    "control_records": 23,
+    "pd_labeled_records": 28,
+    "healthy_gait_frequency_quantiles_hz": [
+      1.23564,
+      1.76504,
+      1.99772,
+      2.17724,
+      2.35508
+    ],
+    "symptomatic_gait_frequency_quantiles_hz": [
+      1.20541,
+      1.53562,
+      1.88578,
+      2.06193,
+      2.28386
+    ]
+  },
+  "other_domains": "research-source-informed simulated mechanics; not numerically fitted to actual HC/PD recordings",
+  "train_validation_test": "synthetic session identifiers; participant realism and clinical generalization not established",
+  "random_seed": 20261021,
+  "source_urls": {
+    "PADS": "https://physionet.org/content/parkinsons-disease-smartwatch/1.0.0/",
+    "WearGaitPD": "https://www.nature.com/articles/s41597-026-06806-2",
+    "BrazilFTT": "https://doi.org/10.6084/m9.figshare.26940823.v1",
+    "mPower": "https://www.synapse.org/mPower",
+    "ArmTremor": "https://zenodo.org/records/4772130"
+  }
+}

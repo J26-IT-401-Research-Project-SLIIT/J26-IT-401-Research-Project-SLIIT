@@ -1,0 +1,30 @@
+{
+  "seed": 20261021,
+  "threads": 1,
+  "bootstrap_replicates": 2000,
+  "default_configuration_index": 0,
+  "simplicity_order": "Configuration index ascending; fixed before execution",
+  "algorithm_tie_order": ["RF", "SVM", "XGB", "CatBoost"],
+  "spaces": {
+    "RF": [
+      {"n_estimators": 120, "max_depth": 3, "min_samples_leaf": 3, "max_features": 1.0},
+      {"n_estimators": 120, "max_depth": 5, "min_samples_leaf": 2, "max_features": 1.0},
+      {"n_estimators": 120, "max_depth": null, "min_samples_leaf": 1, "max_features": 1.0}
+    ],
+    "SVM": [
+      {"C": 0.5, "gamma": "scale"},
+      {"C": 2.0, "gamma": "scale"},
+      {"C": 8.0, "gamma": "scale"}
+    ],
+    "XGB": [
+      {"n_estimators": 100, "max_depth": 2, "learning_rate": 0.05, "reg_lambda": 2.0},
+      {"n_estimators": 150, "max_depth": 2, "learning_rate": 0.05, "reg_lambda": 2.0},
+      {"n_estimators": 150, "max_depth": 3, "learning_rate": 0.05, "reg_lambda": 2.0}
+    ],
+    "CatBoost": [
+      {"iterations": 100, "depth": 3, "learning_rate": 0.05, "l2_leaf_reg": 3.0},
+      {"iterations": 150, "depth": 3, "learning_rate": 0.05, "l2_leaf_reg": 3.0},
+      {"iterations": 150, "depth": 4, "learning_rate": 0.05, "l2_leaf_reg": 3.0}
+    ]
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "version": "3.0.0",
+  "status": "prepared_not_generated",
+  "files": {
+    "configs/evaluation_protocol_v3.json": "7670e047488bee029150a441a0fb22f623efe8a46a6f5781f617d181c13b428b",
+    "configs/simulation_v3.json": "b56d4492f3d58240807f4ce11f9212d43f0ddc18b1d480c3b94011252331c4fa",
+    "docs/ENGINE_AND_V2_AUDIT.md": "5541f8e37b40a594a4f28e4b58ae7c257ad377992265bd111d9c227dad9b2565",
+    "docs/LOCAL_CHECKS.md": "822c2b2e5449e8c839cf1a99115bc41f8c00f16e9a1c24ea39c86a513257644d",
+    "docs/SIMULATION_AND_LIMITATIONS.md": "57454e2589ce7094577bf41090997ba4fc5103c1d5419d0fcb8c98aeff823745",
+    "manifests/session_plan_v3.csv": "134ddcd16393f5122818f3eabb14d6661d443d1efc1d33f13a267fbf9a1c76bf",
+    "manifests/source_manifest.json": "f32628402bdc86127c0c136f4f4a9404c90c2ec53d1e93c768a51c3f0b43fbcb",
+    "manifests/stress_plan_v3.csv": "a2672670adb640f39d256021bbbb0fdfd99300187faeac3e6978c6a777e5725c",
+    "notebooks/Generate_and_Audit_V3.ipynb": "45306d817c91f8c600cd9f28fe98449fb8a709efa70a39e176688328245f4eb7",
+    "pp1_v3.py": "c659c2121b88cf3d41eaee2eb8161088a9b6199fbebb3a1bf748c036106e2df2",
+    "README.md": "f7601fa92b3b5145a2534fc970e7b7e152a6be83c52b520ef65654ebc9c49565",
+    "tests/test_v3.py": "17577064aa0f054b89ece47fc4b9ea2d5428893f2375e1c1611022b30dcb026e",
+    "verify_v2.py": "d5d31b85922356dc5f539bc35ce0f94300761760041d256f8d31557ba66df9cc"
+  }
+}

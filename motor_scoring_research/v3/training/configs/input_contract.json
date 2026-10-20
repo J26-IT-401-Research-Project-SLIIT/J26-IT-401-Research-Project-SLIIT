@@ -1,0 +1,11 @@
+{
+  "expected_backup": "/content/drive/MyDrive/PP1_V3_runs/PP1_Synthetic_Motor_Dataset_V3_20261020T210904Z_b8c13141",
+  "expected_sessions": 240,
+  "required_hashes": {
+    "code/pp1_motor_engine.py": "c39620fe8738ca9217b1b7f9d75141e0f2ab9a7b49d22ebd63b6234202c437e4",
+    "code/pp1_v3.py": "c659c2121b88cf3d41eaee2eb8161088a9b6199fbebb3a1bf748c036106e2df2",
+    "config.json": "f8521877146f19bfbc7d5b088d78bd28c9d6ba3ca0f88b274d97b412df569340",
+    "evaluation_protocol.json": "db2d8eaabd8be0e12ee413493a3652af1cd5ee2b35d71ea41f42def21fd2d091",
+    "splits.csv": "134ddcd16393f5122818f3eabb14d6661d443d1efc1d33f13a267fbf9a1c76bf"
+  }
+}

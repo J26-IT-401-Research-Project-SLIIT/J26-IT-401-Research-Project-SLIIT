@@ -1,0 +1,16 @@
+{
+  "version": "2B.1.0",
+  "status": "prepared_not_trained",
+  "files": {
+    "configs/frozen_evaluation_protocol.json": "7670e047488bee029150a441a0fb22f623efe8a46a6f5781f617d181c13b428b",
+    "configs/frozen_session_plan.csv": "134ddcd16393f5122818f3eabb14d6661d443d1efc1d33f13a267fbf9a1c76bf",
+    "configs/input_contract.json": "579b19fb6917fd21bf66a94a1eb1b515f89659e210e5a9b290516dffc3288cf2",
+    "configs/search_spaces.json": "1e15b0abe30b23db3a1e5dea63b74cee7c92d1709e215f15338c3fa09e29ec37",
+    "docs/PREPARATION_CHECKS.md": "dc88ad1fbf4162af8338ebe6bfb922249db59189ec1b953e0fc54478166f7fd7",
+    "notebooks/PP1_V3_Train_Compare_16_Models.ipynb": "6e69b80c28f9302e7ca9fcad16213e05e22a362b22ee389b23f0d41e8b34b335",
+    "README.md": "300b18999dc4ecf0d6c352d3d8b0b6a8922cbbef2f564eb2d8fdc7fb38836ab5",
+    "requirements-colab.txt": "ca2196837732bfd92bbdb7bae870bec7cbf452c35ed8112bb9b29b3d2a540ce8",
+    "src/pp1_training.py": "c46281d18c9cc4b7306c241cfd625c88e6df1de040c5f9e545511be37613edf2",
+    "tests/test_training.py": "2c84d55d97995c14d78966ccf65a7295caa8e1d14320f9197157a1653cae563c"
+  }
+}

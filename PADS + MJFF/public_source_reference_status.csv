@@ -1,0 +1,6 @@
+source,public_url,domain,access,numeric_fitting_status,protocol_difference
+PADS,https://physionet.org/content/parkinsons-disease-smartwatch/1.0.0/,TS and RS wrist IMU; HC and PD,public download; CC BY-NC-SA 4.0,NOT FITTED: source task/unit context only,Apple Watch tasks 10–20 s; no direct rigidity rating from wrist gyroscope
+WearGaitPD,https://www.nature.com/articles/s41597-026-06806-2,"GI gait, HC and PD",Synapse registration required; CC BY 4.0,USED: aggregate frequency / RMS from supplied extracted 51-person wrist-feature table,Short clinical gait tasks; 180s is simulated extrapolation; not measured on PP1 device
+BrazilFTT,https://doi.org/10.6084/m9.figshare.26940823.v1,"BS touchscreen tap timestamps, healthy adults",publicly described Figshare dataset,NOT FITTED: methodological reference only,30-second smartphone screen vs 10-second capacitive touch
+mPower,https://www.synapse.org/mPower,"BS tapping, HC and PD",Synapse registration and data use agreement required,NOT FITTED: publication-level context only,"20-second dual-target tapping, access-gated; cannot infer PP1 amplitude"
+ArmTremor,https://zenodo.org/records/4772130,"TS accelerometer; no tremor, essential tremor, PD tremor",public download; CC BY 4.0,NOT FITTED: domain reference only,Different sensors and protocol; not directly copied or re-calibrated

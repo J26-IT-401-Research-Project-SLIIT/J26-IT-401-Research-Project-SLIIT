@@ -1,0 +1,13 @@
+{
+  "numeric_source_policy": "assumptions_only",
+  "source_independence_claim": false,
+  "references": [
+    {"id": "SIM_ASSUMPTIONS_V3", "role": "All numerical V3 parameters", "real_source_records": 0, "source_split": "not_applicable", "clinical_validation": false},
+    {"id": "PADS_1.0.0", "url": "https://physionet.org/content/parkinsons-disease-smartwatch/1.0.0/", "role": "Wrist accelerometer/gyroscope task context only", "numeric_values_used": false, "page_checked": "2026-10-21"},
+    {"id": "V2_WearGait_derived_table_unverified", "role": "Historical V2 provenance only; not used by V3", "numeric_values_used": false, "missing": "Original 51-record table and source identities"},
+    {"id": "V2_BrazilFTT", "url": "https://doi.org/10.6084/m9.figshare.26940823.v1", "role": "Inherited V2 tapping reference, not independently validated here", "numeric_values_used": false},
+    {"id": "V2_mPower", "url": "https://www.synapse.org/mPower", "role": "Inherited V2 tapping reference, not independently validated here", "numeric_values_used": false},
+    {"id": "V2_ArmTremor", "url": "https://zenodo.org/records/4772130", "role": "Inherited V2 tremor reference, not independently validated here", "numeric_values_used": false}
+  ],
+  "future_empirical_mode": "Not implemented. Requires source IDs, access checks, grouping linked records, and source partitioning before simulation; never silently use V2 numeric anchors."
+}

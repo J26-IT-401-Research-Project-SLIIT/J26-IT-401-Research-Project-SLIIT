@@ -1,0 +1,3 @@
+group,ref_records,frequency_q10_hz,frequency_q25_hz,frequency_median_hz,frequency_q75_hz,frequency_q90_hz
+healthy_reference,23,1.23564,1.76504,1.99772,2.17724,2.35508
+PD_labeled_reference,28,1.20541,1.53562,1.88578,2.06193,2.28386
