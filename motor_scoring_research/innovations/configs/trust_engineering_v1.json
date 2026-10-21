@@ -1,0 +1,17 @@
+{
+  "assumptions_id": "trust_engineering_v1_uncalibrated",
+  "status": "engineering_assumptions_not_measured_device_tolerances",
+  "max_attempts": 32,
+  "domain_probes": {
+    "TS": [{"family":"offset","amplitude":0.01,"unit":"m/s^2"},{"family":"noise","amplitude":0.03,"unit":"m/s^2_rms"},{"family":"gain","amplitude":0.01,"unit":"fraction"}],
+    "BS": [{"family":"tap_jitter","amplitude":0.001,"unit":"s"},{"family":"tap_jitter","amplitude":0.005,"unit":"s"}],
+    "RS": [{"family":"offset","amplitude":0.005,"unit":"rad/s"},{"family":"noise","amplitude":0.015,"unit":"rad/s_rms"},{"family":"gain","amplitude":0.01,"unit":"fraction"}],
+    "GI": [{"family":"offset","amplitude":0.01,"unit":"m/s^2"},{"family":"noise","amplitude":0.03,"unit":"m/s^2_rms"},{"family":"gain","amplitude":0.01,"unit":"fraction"}]
+  },
+  "joint_probes": [
+    {"family":"noise","amplitude":0.01,"unit":"domain_native_rms"},
+    {"family":"gain","amplitude":0.005,"unit":"fraction"}
+  ],
+  "quantization": "disabled_until_verified_device_conversion_step",
+  "gi_time_axis": "unsupported_without_continuous_reference_trajectory"
+}
