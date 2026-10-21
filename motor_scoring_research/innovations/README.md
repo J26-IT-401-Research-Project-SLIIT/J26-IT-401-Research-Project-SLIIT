@@ -1,9 +1,9 @@
-# TRUST-MPS diagnostics and RECAP-MPS foundation (Phase 3C)
+# TRUST-MPS diagnostics and RECAP-MPS recommendations (Phase 3D)
 
 This package implements input/output contracts, CSV quality validation, a
-read-only **interface** to the four frozen V3 classifiers, and finite TRUST-MPS
-perturbation diagnostics. It contains no RECAP retest ranking algorithm,
-dataset generation or training.
+read-only **interface** to the four frozen V3 classifiers, finite TRUST-MPS
+perturbation diagnostics and a recommendation-only RECAP-MPS policy. It contains
+no dataset generation, training, retest execution or inferred retest outcomes.
 Nothing in this package loads a model on import. Phase 3A scientific assumptions
 and later-phase boundaries are in the [design audit](../innovation_design/PHASE_3A_DESIGN_AUDIT.md).
 
@@ -139,6 +139,58 @@ predictions. In real-device mode, the complete-session extractor may return
 features, but the predictor is never called and all demo scores, MPS and
 score-sensitivity diagnostics remain null. A stable score only means no flip
 in the tested nuisance library; it does not establish clinical correctness.
+
+## Phase 3D RECAP-MPS API and policy
+
+`recap.recommend_reassessment(assessment, trust=None, *, config=None,
+remediation=None, prior_repeats=None, completed_rounds=0,
+recording_time_budget_seconds=None, operator_permits_repeat=True)` returns
+`(ReassessmentAdvice, json_ready_sidecar)`. `assessment` is the unchanged
+`AssessmentResult`. `trust` is the existing `trust_mps.v1` sidecar or `None`.
+No model, extractor, CSV writer or physical-device API is called.
+
+`remediation` is optional external, independently verified acquisition state
+per domain: `corrected`, `unresolved`, or `unknown` (default). A hard-invalid
+recording is recommended for a repeat only when its acquisition problem has
+been corrected. Persistent and ambiguous faults, including empty taps with
+unknown capture status, receive a clarify/repair decision with zero recording
+seconds. Existing quality reason codes remain unchanged. A domain's symptoms
+or score alone never become an acquisition fault.
+
+Acquisition actions precede sensitivity ranking. For otherwise valid complete
+synthetic-demo sessions, RECAP validates the TRUST mode, baseline scores/MPS,
+quality, per-family counts, ordinal histogram, and drift arithmetic. Missing,
+zero-probe or malformed diagnostics mean insufficient evidence, not zero
+uncertainty. Eligible domains with observed score changes are ranked by
+`mean_absolute_modeled_score_drift / (16 * fixed_task_duration_seconds)`;
+equal values follow the configured domain order. The mean is descriptive over
+the finite, configured probe library. This ratio is a **modeled sensitivity
+per recording second heuristic**, not expected improvement or clinical benefit.
+
+[recap_policy_v1.json](configs/recap_policy_v1.json) defaults to one recommended
+task per round, 180 recording seconds, one repeat per domain, two rounds per
+session, one valid probe and one observed score change as minimum sensitivity
+evidence. These are unevaluated engineering policy settings, not optimized
+thresholds. The request may set a smaller recording-time budget; an operator
+may stop further recommendations. The JSON-ready `recap_mps.v1` sidecar records
+decision status, recommended tasks and fixed durations, each domain's quality
+and eligibility reasons, modeled ranking when permitted, total recording time,
+stopping reason, assumptions/config hash and explicit limitations. It records
+`automatic_execution=false`, `retest_outcomes=null`, and
+`score_replacement=false`. Recording time excludes setup, recovery and
+computation. It never changes the existing fusion numeric input.
+
+Real-device mode ignores score-dependent TRUST data entirely. It can recommend
+a new capture only after independently confirmed acquisition correction; scores
+and MPS remain unavailable. Before Colab integration, the actual frozen model
+manifest/feature order must be verified, the exact complete-session extractor
+bridge connected, and a separate training-side paired-repeat benchmark
+preregistered. The inspected V3 final test must not be reused for policy tuning.
+
+The [Phase 3E-A integration guide](integration/README.md) documents the
+code-only archive, source-derived checkpoint schema, exact complete-session
+bridge and manually executed [read-only Colab preflight notebook](notebooks/PP1_TRUST_RECAP_Read_Only_Colab_Preflight.ipynb).
+Preflight does not deserialize a pipeline or run feature extraction.
 
 ## Checkpoint provenance and local limitation
 

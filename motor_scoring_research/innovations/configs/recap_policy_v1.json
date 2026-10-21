@@ -1,0 +1,11 @@
+{
+  "assumptions_id": "recap_policy_v1_unevaluated",
+  "max_recommendations": 1,
+  "recording_time_budget_seconds": 180,
+  "max_repeats_per_domain": 1,
+  "max_rounds_per_session": 2,
+  "minimum_valid_probes_per_domain": 1,
+  "minimum_observed_score_changes": 1,
+  "tie_break_order": ["TS", "BS", "RS", "GI"],
+  "status": "engineering_policy_not_calibrated_or_clinically_validated"
+}

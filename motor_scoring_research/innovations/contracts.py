@@ -285,8 +285,9 @@ class ReassessmentAdvice:
             raise ValueError('No repeat recording may be counted for this action')
         if self.action in (ReassessmentAction.FIX_ACQUISITION_THEN_REPEAT,
                            ReassessmentAction.REPEAT_RECOMMENDED):
-            if not self.ranked_domains or self.additional_recording_seconds != DURATION_SECONDS[self.ranked_domains[0]]:
-                raise ValueError('First recommended task must use its fixed protocol duration')
+            if not self.ranked_domains or self.additional_recording_seconds != sum(
+                    DURATION_SECONDS[d] for d in self.ranked_domains):
+                raise ValueError('Recommended tasks must use their fixed protocol durations')
 
 
 class TrustAnalyzer(Protocol):
