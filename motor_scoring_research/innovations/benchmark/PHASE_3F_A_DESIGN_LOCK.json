@@ -1,0 +1,22 @@
+{
+  "audit_generation_approved": false,
+  "files_sha256": {
+    "motor_scoring_research/innovations/benchmark/PHASE_3F_A_BENCHMARK_DESIGN.md": "b57a35339c90e5ba154421139120e6a6328ef684105559784ce11938a9167d3b",
+    "motor_scoring_research/innovations/benchmark/freeze_parent_split.py": "dcd8ac744cfda929196ab0b8c39b955633467e8763fa3e9fcc6c5377bb0bbd53",
+    "motor_scoring_research/innovations/benchmark/frozen_parent_split_v1.csv": "b988fd10fd6e13cd4ff39761e5756fed3f6c3c70b77931d4dcde8dd2facd7581",
+    "motor_scoring_research/innovations/benchmark/frozen_parent_split_v1.lock.json": "a20e394e7a6e29e8634f70bc3d443e0bd4d19136faf81d3b062b28b01328f5a9",
+    "motor_scoring_research/innovations/benchmark/preregistration_v1.json": "cb81071ce9ecd0252a7504a955dd1deb4d58b592e54f78d497b84f4c5eeb0849",
+    "motor_scoring_research/innovations/configs/recap_policy_v1.json": "a78e8845bebc31ff341339c50c468a3ccd5d2453667ef1c41ac005b76606ff81",
+    "motor_scoring_research/innovations/configs/trust_engineering_v1.json": "8dcd8798e82154f4712be58426bff3a147abca96e5019571e36413908d43127a",
+    "motor_scoring_research/innovations/integration/feature_bridge.py": "7dec1ac9bd13bf4de4856ba0cbd152947913512ba1aacfb27f9f091697482fc1",
+    "motor_scoring_research/innovations/quality.py": "8a327b25b3af2163e2141d5b51887ba810812a921ff47dd7e41348e98580bed9",
+    "motor_scoring_research/innovations/recap.py": "f26e707269784c7ef2c6a6e65817452d4eca3d9292449cef93cb97af9e5f2791",
+    "motor_scoring_research/innovations/trust.py": "f25f96185df61198b69c17d3bb73e086bb0d352b86096e45dfbbb4beaaf68b2f",
+    "motor_scoring_research/reference_engine/pp1_motor_engine.py": "c39620fe8738ca9217b1b7f9d75141e0f2ab9a7b49d22ebd63b6234202c437e4",
+    "motor_scoring_research/v3/training/src/pp1_training.py": "c46281d18c9cc4b7306c241cfd625c88e6df1de040c5f9e545511be37613edf2"
+  },
+  "remote_checkpoint_hashes": "must_be_reverified_before_audit",
+  "remote_selected_models_manifest_sha256": null,
+  "schema_version": "pp1_innovation_design_lock.v1",
+  "status": "design_only_no_benchmark_generation_or_evaluation"
+}

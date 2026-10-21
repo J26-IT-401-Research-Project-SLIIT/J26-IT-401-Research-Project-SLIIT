@@ -1,0 +1,36 @@
+{
+  "counts": {
+    "audit": 84,
+    "development": 84
+  },
+  "generator_family_by_split": {
+    "audit": {
+      "amplitude_modulated": 33,
+      "continuous": 20,
+      "intermittent": 31
+    },
+    "development": {
+      "amplitude_modulated": 44,
+      "continuous": 20,
+      "intermittent": 20
+    }
+  },
+  "manifest_rows": 168,
+  "manifest_sha256": "b988fd10fd6e13cd4ff39761e5756fed3f6c3c70b77931d4dcde8dd2facd7581",
+  "original_validation_test_denylist_count": 72,
+  "original_validation_test_denylist_sha256": "779c45b869160e6d28b5dc9f35f251f17881781cbaee0855b31a14691ee1f71d",
+  "profiles_by_split": {
+    "audit": {
+      "healthy_like": 42,
+      "symptom_like": 42
+    },
+    "development": {
+      "healthy_like": 42,
+      "symptom_like": 42
+    }
+  },
+  "salt": "PP1_INNOVATION_PARENT_SPLIT_V1|20261022|",
+  "schema_version": "pp1_innovation_parent_split.v1",
+  "source_independence_claim": false,
+  "source_sha256": "134ddcd16393f5122818f3eabb14d6661d443d1efc1d33f13a267fbf9a1c76bf"
+}
