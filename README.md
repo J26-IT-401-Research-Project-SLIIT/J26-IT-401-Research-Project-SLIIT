@@ -278,3 +278,10 @@ This project is under active academic development. Team members should work on f
 ## Medical Disclaimer
 
 **For research and educational use only.** This framework is not intended to provide medical advice, establish a diagnosis, replace a neurologist's evaluation, or determine treatment. Anyone with concerning symptoms should seek advice from a qualified healthcare professional.
+
+
+## Component 4 demonstration
+
+The `multimodal-fushion-model` branch includes a local Python/FastAPI fusion prototype with a saved Random Forest pipeline, synthetic datasets, SHAP/LIME explanations, Assessment and Evaluation pages, and printable reports. It is a synthetic research demonstration, not a clinically validated diagnostic model.
+
+See [Component 4 setup and methodology](COMPONENT4_README.md), [Assessment viva guide](ASSESSMENT_VIVA_GUIDE.md), [Evaluation viva guide](EVALUATION_VIVA_GUIDE.md), and [Synthetic dataset Q&A](SYNTHETIC_DATASET_VIVA_QA.md). Existing motor-component files are retained.

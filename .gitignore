@@ -1,0 +1,36 @@
+# Local Python environment and runtime files
+.venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+*.log
+component4_batch_output.csv
+.env
+.env.*
+!.env.example
+
+# Keep only the saved models needed to run the demo and its archived checks.
+*.joblib
+!multimodal_fusion/artifacts/fusion_model.joblib
+!multimodal_fusion/artifacts/baseline_v1/fusion_model.joblib
+
+# Superseded local guides; the Assessment/Evaluation and dataset Q&A guides are current.
+/DASHBOARD_DEMO_GUIDE.md
+/COMPONENT4_PP1_DEMO.md
+/DATASET_VIVA_GUIDE.md
+/DATA_LEAKAGE_AUDIT.md
+
+# Unused browser extension from the earlier single-page dashboard.
+/multimodal_fusion/web/scenario.js
+
+# Generated examples and duplicate historical charts can be regenerated.
+/multimodal_fusion/artifacts/example_report.html
+/multimodal_fusion/artifacts/example_explanations.json
+/multimodal_fusion/artifacts/improvement_confusion_matrix.png
+/multimodal_fusion/artifacts/improvement_model_comparison.png
+/multimodal_fusion/artifacts/improvement_model_comparison.csv
+/multimodal_fusion/artifacts/historical_hard_leakage_audit.json
+/multimodal_fusion/artifacts/v2_frozen_protocol.json
+/multimodal_fusion/artifacts/baseline_v1/*
+!/multimodal_fusion/artifacts/baseline_v1/evaluation.json
+!/multimodal_fusion/artifacts/baseline_v1/fusion_model.joblib

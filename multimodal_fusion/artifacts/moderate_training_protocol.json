@@ -1,0 +1,84 @@
+{
+  "version": "3.0.0-pp1-moderate",
+  "scope": "Synthetic PP1 demonstration: moderate-overlap scenario (noise SD 0.50). Five-class outputs are simulator-based model estimates, not validated disease probabilities. The retained harder benchmark is reported separately. Healthy is not a supported class.",
+  "created_utc": "2026-10-21T02:28:15.631099+00:00",
+  "purpose": "User-approved moderate-overlap synthetic PP1 demonstration; harder scenario preserved",
+  "noise_sd": 0.5,
+  "data_seed": 1401,
+  "fresh_seed": 1402,
+  "cohort_n": 1000,
+  "split_n": {
+    "train": 600,
+    "validation": 200,
+    "test": 200
+  },
+  "class_distribution": {
+    "PD": 200,
+    "ET": 200,
+    "CA": 200,
+    "AP": 200,
+    "DLB": 200
+  },
+  "profiles": {
+    "PD": [
+      0.78,
+      0.74,
+      0.74
+    ],
+    "ET": [
+      0.76,
+      0.32,
+      0.68
+    ],
+    "CA": [
+      0.5,
+      0.75,
+      0.4
+    ],
+    "AP": [
+      0.68,
+      0.65,
+      0.38
+    ],
+    "DLB": [
+      0.38,
+      0.48,
+      0.62
+    ]
+  },
+  "selection": "Highest validation macro F1 among four Random Forest candidates; first candidate breaks exact ties",
+  "scenario_selection_disclosure": "Moderate overlap was chosen after a prior simulator sensitivity study, not established from clinical data",
+  "retained_hard_sha256": "0c95b855e4738c037fd9d0a34bd10200139497d0c2e29f383ad90fb8e05a5675",
+  "test_used_for_configuration_selection": false,
+  "selected_index": 3,
+  "candidates": [
+    {
+      "max_depth": 4,
+      "min_samples_leaf": 8,
+      "training_cv_macro_f1_mean": 0.8215275476540835,
+      "training_cv_macro_f1_std": 0.03435547211050777,
+      "validation_macro_f1": 0.8248036637986681
+    },
+    {
+      "max_depth": 6,
+      "min_samples_leaf": 5,
+      "training_cv_macro_f1_mean": 0.8295344846558592,
+      "training_cv_macro_f1_std": 0.030237741351580697,
+      "validation_macro_f1": 0.8394888454817317
+    },
+    {
+      "max_depth": 8,
+      "min_samples_leaf": 4,
+      "training_cv_macro_f1_mean": 0.828090355987311,
+      "training_cv_macro_f1_std": 0.03487520816954158,
+      "validation_macro_f1": 0.8344421159854335
+    },
+    {
+      "max_depth": null,
+      "min_samples_leaf": 6,
+      "training_cv_macro_f1_mean": 0.8298371507569481,
+      "training_cv_macro_f1_std": 0.031198542757912208,
+      "validation_macro_f1": 0.8445329087691473
+    }
+  ]
+}

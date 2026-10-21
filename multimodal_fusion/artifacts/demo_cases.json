@@ -1,0 +1,91 @@
+[
+  {
+    "name": "PD example",
+    "synthetic_label": "PD",
+    "synthetic_id": "MOD-0002",
+    "split": "validation",
+    "selection": "first ID in validation class; not prediction-selected",
+    "scenario": "moderate_overlap",
+    "scores": {
+      "motor_pd_probability": 0.902101,
+      "voice_pd_probability": 0.780905,
+      "handwriting_pd_probability": 0.829404
+    }
+  },
+  {
+    "name": "ET example",
+    "synthetic_label": "ET",
+    "synthetic_id": "MOD-0001",
+    "split": "validation",
+    "selection": "first ID in validation class; not prediction-selected",
+    "scenario": "moderate_overlap",
+    "scores": {
+      "motor_pd_probability": 0.456371,
+      "voice_pd_probability": 0.2569,
+      "handwriting_pd_probability": 0.642385
+    }
+  },
+  {
+    "name": "CA example",
+    "synthetic_label": "CA",
+    "synthetic_id": "MOD-0024",
+    "split": "validation",
+    "selection": "first ID in validation class; not prediction-selected",
+    "scenario": "moderate_overlap",
+    "scores": {
+      "motor_pd_probability": 0.389235,
+      "voice_pd_probability": 0.796919,
+      "handwriting_pd_probability": 0.456388
+    }
+  },
+  {
+    "name": "AP example",
+    "synthetic_label": "AP",
+    "synthetic_id": "MOD-0015",
+    "split": "validation",
+    "selection": "first ID in validation class; not prediction-selected",
+    "scenario": "moderate_overlap",
+    "scores": {
+      "motor_pd_probability": 0.671586,
+      "voice_pd_probability": 0.601513,
+      "handwriting_pd_probability": 0.464197
+    }
+  },
+  {
+    "name": "DLB example",
+    "synthetic_label": "DLB",
+    "synthetic_id": "MOD-0006",
+    "split": "validation",
+    "selection": "first ID in validation class; not prediction-selected",
+    "scenario": "moderate_overlap",
+    "scores": {
+      "motor_pd_probability": 0.391943,
+      "voice_pd_probability": 0.460897,
+      "handwriting_pd_probability": 0.413965
+    }
+  },
+  {
+    "name": "Conflicting inputs",
+    "scores": {
+      "motor_pd_probability": 0.9,
+      "voice_pd_probability": 0.2,
+      "handwriting_pd_probability": 0.55
+    }
+  },
+  {
+    "name": "Borderline inputs",
+    "scores": {
+      "motor_pd_probability": 0.5,
+      "voice_pd_probability": 0.5,
+      "handwriting_pd_probability": 0.5
+    }
+  },
+  {
+    "name": "Missing voice",
+    "scores": {
+      "motor_pd_probability": 0.75,
+      "voice_pd_probability": null,
+      "handwriting_pd_probability": 0.65
+    }
+  }
+]

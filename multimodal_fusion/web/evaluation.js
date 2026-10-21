@@ -1,0 +1,11 @@
+const pct=value=>(100*value).toFixed(1)+'%';
+const node=(tag,text)=>{const el=document.createElement(tag);el.textContent=text;return el;};
+(async()=>{try{const response=await fetch('/api/evaluation');if(!response.ok)throw new Error('Evaluation results could not be loaded.');const evidence=await response.json();const rf=evidence.results['Random Forest fusion'];const macro=rf.classification_report['macro avg'];
+for(const [label,value]of [['Accuracy',rf.accuracy],['Macro precision',macro.precision],['Macro recall',macro.recall],['Macro F1',macro['f1-score']]]){const card=document.createElement('div');card.className='metric';card.append(node('span',label),node('b',pct(value)));document.getElementById('evaluation-metrics').append(card);}
+const names={PD:"Parkinson's disease",ET:'Essential tremor',CA:'Cerebellar ataxia',AP:'Atypical parkinsonism',DLB:'Dementia with Lewy bodies'};
+for(const label of evidence.class_order){const result=rf.classification_report[label];const row=document.createElement('tr');for(const text of[`${names[label]} (${label})`,pct(result.precision),pct(result.recall),pct(result['f1-score'])])row.append(node('td',text));document.getElementById('class-results').append(row);}
+for(const [name,result]of Object.entries(evidence.results)){const row=document.createElement('tr');for(const text of[name,pct(result.accuracy),pct(result.macro_f1)])row.append(node('td',text));document.getElementById('evaluation-comparison').append(row);}
+const splits=evidence.data.splits;document.getElementById('evaluation-protocol').textContent=`The 1,000-record synthetic dataset was split into ${splits.train} training, ${splits.validation} validation and ${splits.test} test records. Random Forest configuration was selected using validation results.`;
+const fresh=evidence.fresh_results['Random Forest fusion'];document.getElementById('confirmation-result').textContent=`A separate ${fresh.n}-record sample from the same simulation achieved ${pct(fresh.accuracy)} accuracy. The class profiles are assumptions; these results do not measure clinical performance.`;
+document.getElementById('evaluation-content').hidden=false;
+}catch(error){document.getElementById('evaluation-error').textContent=error.message;}})();

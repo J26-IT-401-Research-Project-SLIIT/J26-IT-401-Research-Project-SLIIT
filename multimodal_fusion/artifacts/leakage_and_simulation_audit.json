@@ -1,0 +1,84 @@
+{
+  "created_utc": "2026-10-21T02:35:04.180332+00:00",
+  "active_scenario": "moderate_overlap",
+  "dataset_filename": "synthetic_moderate_participants.csv",
+  "direct_checks": {
+    "participant_overlap": {
+      "train/validation": 0,
+      "train/test": 0,
+      "validation/test": 0
+    },
+    "exact_feature_overlap": {
+      "train/validation": 0,
+      "train/test": 0,
+      "validation/test": 0
+    },
+    "fresh_vs_training_exact_feature_overlap": 0,
+    "training_background_matches_training_only": true,
+    "fitted_features": [
+      "motor_pd_probability",
+      "voice_pd_probability",
+      "handwriting_pd_probability"
+    ],
+    "metadata_or_labels_used_as_features": false,
+    "class_counts": {
+      "ET": 200,
+      "PD": 200,
+      "AP": 200,
+      "CA": 200,
+      "DLB": 200
+    },
+    "score_missing_cells": 0
+  },
+  "code_review": {
+    "training": "Fits only training partition; logistic scaling is inside its training pipeline",
+    "selection": "Uses validation macro F1; final labels do not enter fitting",
+    "test_reuse": "All previously reported tests are now inspected. The current cohort/confirmation splits were fixed before its configuration selection. Future tuning after their inspection needs a new reserved test.",
+    "deployment_decision": "The active moderate scenario was selected after a sensitivity study and user approval. Configuration selection used its validation records. Historical harder-scenario tests were already inspected; report the scenario change explicitly.",
+    "presentation_issue": "Original presets picked confident test examples. Fixed-rule validation examples replace them; demo success is not accuracy evidence.",
+    "external_validity": "Train/test share an assumed generator. No clinical or five-disorder validation is established."
+  },
+  "partition_accuracy": {
+    "train": 0.9,
+    "validation": 0.845,
+    "test": 0.855,
+    "fresh_final_test": 0.838
+  },
+  "shuffled_label_control_accuracy": 0.184,
+  "uniform_random_expected_accuracy": 0.2,
+  "simulator_sensitivity": [
+    {
+      "scenario": "low_overlap",
+      "logit_noise_sd": 0.25,
+      "training_n": 600,
+      "evaluation_n": 5000,
+      "accuracy": 0.963,
+      "macro_f1": 0.9628256965543102,
+      "accuracy_binomial_se": 0.0026694943341389592,
+      "scope": "Different assumed simulator overlap; not an improvement to the same prediction problem and not clinical evidence"
+    },
+    {
+      "scenario": "moderate_overlap",
+      "logit_noise_sd": 0.5,
+      "training_n": 600,
+      "evaluation_n": 5000,
+      "accuracy": 0.8274,
+      "macro_f1": 0.8268000772181896,
+      "accuracy_binomial_se": 0.005344328582712706,
+      "scope": "Different assumed simulator overlap; not an improvement to the same prediction problem and not clinical evidence"
+    },
+    {
+      "scenario": "harder_overlap",
+      "logit_noise_sd": 0.85,
+      "training_n": 600,
+      "evaluation_n": 5000,
+      "accuracy": 0.6114,
+      "macro_f1": 0.6112456592230566,
+      "accuracy_binomial_se": 0.006893330689876991,
+      "scope": "Different assumed simulator overlap; not an improvement to the same prediction problem and not clinical evidence"
+    }
+  ],
+  "live_dataset_unchanged": true,
+  "live_model_unchanged": true,
+  "conclusion": "No direct split/feature/preprocessing leakage identified in these checks. This is not proof of every possible leakage path. Simulation assumptions and class overlap dominate observed performance."
+}

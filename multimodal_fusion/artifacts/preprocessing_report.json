@@ -1,0 +1,51 @@
+{
+  "version": "score-schema-v1",
+  "fitted_on": "600 training records only",
+  "fit_rows": 600,
+  "steps": [
+    "Select exactly MPS/VPS/HPS; exclude ID/label/split/provenance/scenario",
+    "Canonical feature ordering",
+    "Validate numeric types and reject boolean scores",
+    "Reject missing, NaN and infinite values",
+    "Reject out-of-range scores; do not silently clip",
+    "Pass validated 0\u20131 scores to Random Forest without standard scaling"
+  ],
+  "training_min": {
+    "motor_pd_probability": 0.162632,
+    "voice_pd_probability": 0.095277,
+    "handwriting_pd_probability": 0.125716
+  },
+  "training_max": {
+    "motor_pd_probability": 0.942958,
+    "voice_pd_probability": 0.963235,
+    "handwriting_pd_probability": 0.958342
+  },
+  "normalization": "Upstream score probabilities already use [0,1]; no fitted tree scaler",
+  "imputation": "None: incomplete live requests return no prediction",
+  "raw_input_processing": "Image/audio/sensor preprocessing remains in Components 1\u20133; fusion receives their scores",
+  "logistic_baseline": "Score validation then StandardScaler fitted within each training pipeline",
+  "data_preparation": {
+    "rows": 1000,
+    "missing_feature_cells": 0,
+    "nonfinite_or_out_of_range_cells": 0,
+    "duplicate_participant_ids": 0,
+    "duplicate_score_vectors": 0,
+    "features_used": [
+      "motor_pd_probability",
+      "voice_pd_probability",
+      "handwriting_pd_probability"
+    ],
+    "metadata_excluded": [
+      "synthetic_id",
+      "label",
+      "provenance",
+      "split",
+      "scenario",
+      "generator_noise_sd"
+    ],
+    "learned_preprocessing": "None; schema/range validation and canonical column ordering",
+    "scaling_for_tree": "Not applied; all inputs already have probability scale [0,1]",
+    "missing_input_policy": "Return incomplete; do not silently impute",
+    "split_policy": "Stratified participant split before fitting; entire sklearn pipeline cloned inside each CV fold"
+  }
+}

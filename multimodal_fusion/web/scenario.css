@@ -1,0 +1,35 @@
+.preprocessing-panel{margin:25px 0}.scenario-panel{margin:25px 0}.processing-flow{display:flex;flex-wrap:wrap;gap:10px;margin:20px 0}.processing-flow span{background:#e8f4f4;padding:10px 14px;border-radius:8px;color:#14656b;font-size:12px;font-weight:600}.processing-flow span:not(:last-child)::after{content:' →';margin-left:8px}.preprocessing-panel li{font-size:13px;margin:8px 0;color:#48656d}.improvement-study summary{font-weight:650;cursor:pointer;font-size:18px;color:#48656d}
+
+/* Compact assessment layout. */
+.intro{grid-template-columns:1.4fr 1fr;gap:36px;margin-bottom:28px}
+h1{font-size:34px;letter-spacing:-.8px;line-height:1.2;margin:8px 0 12px}
+main{max-width:1200px;padding-top:28px}
+.intro aside{border-radius:8px;padding:18px}.intro aside p{margin-bottom:0}
+.card{border-radius:8px;box-shadow:none;padding:24px}
+.explanations{grid-template-columns:1.3fr 1fr;align-items:start;margin-bottom:24px}
+summary{cursor:pointer;font-size:17px;font-weight:600;color:var(--ink)}
+.evaluation-details{margin-top:20px}.evaluation-details .plots{margin-top:20px}
+.preprocessing-panel{margin:20px 0}.metrics{grid-template-columns:repeat(4,1fr);gap:12px}
+.metric{border-radius:8px;padding:16px}.metric b{font-size:26px}
+@media(max-width:900px){.intro,.explanations{grid-template-columns:1fr}.metrics{grid-template-columns:repeat(2,1fr)}}
+.control-title input[type=number]{width:115px}
+.intro.assessment-intro{grid-template-columns:1fr;gap:0}.assessment-intro .lead{max-width:760px}
+
+/* Shared page navigation. */
+.app-header{max-width:none;justify-content:space-between;padding:18px max(24px,calc((100vw - 1136px)/2));gap:24px;flex-wrap:wrap}
+.app-brand{display:flex;flex-direction:column;text-decoration:none;color:var(--ink);gap:2px}
+.app-brand span{font-size:10px;font-weight:700;letter-spacing:1.5px;color:var(--teal)}
+.app-brand b{font-size:21px;font-weight:650;line-height:1.3}
+.page-tabs{display:flex;gap:5px;padding:4px;background:#edf2f3;border-radius:9px}
+.page-tabs a{padding:9px 22px;border-radius:6px;color:#52686f;font-size:14px;font-weight:600}
+.page-tabs a.active{background:white;color:#087e8b;box-shadow:0 1px 4px #183f4812}
+.page-tabs a:hover{background:#e2ecee}.page-tabs a.active:hover{background:white}
+.page-intro{margin:5px 0 22px}.page-intro h1{margin-bottom:10px}.page-intro .lead{margin:0}
+.evaluation-scope{font-size:12px;color:#667980;margin:12px 0 0}
+.evaluation-page .metrics{margin:20px 0 10px}.evaluation-page .metric{padding:20px}
+.evaluation-page .metric b{margin-top:8px;font-size:31px}.metric-key{margin-bottom:24px}
+.class-results{margin-top:20px}.class-results td:not(:first-child),.class-results th:not(:first-child){text-align:right}
+.evaluation-page tbody tr:first-child{background:transparent}.evaluation-page tbody tr:hover{background:#f5f9f9}
+.evaluation-context p{font-size:14px;color:#52686f}.evaluation-details h3{font-size:17px;margin:25px 0 8px}
+.matrix-figure{max-width:720px;margin:14px auto 24px;border:0}.error{color:#aa3737}
+@media(max-width:600px){.app-header{padding:16px 18px;gap:16px}.page-tabs{order:initial;width:auto}.page-tabs a{padding:8px 14px}.app-brand b{font-size:18px}.evaluation-page .metric{padding:15px}}
