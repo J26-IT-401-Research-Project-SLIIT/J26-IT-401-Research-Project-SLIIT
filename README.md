@@ -1,280 +1,288 @@
-[README.md](https://github.com/user-attachments/files/33612440/README.md)
+[README-J26-IT-401 .md](https://github.com/user-attachments/files/34195358/README-J26-IT-401.md)
 # Explainable Multimodal AI Framework for Parkinsonian Disorder Screening
 
-**A research prototype combining portable motor sensing, voice assessment, handwriting analysis, and explainable AI to support early screening of Parkinsonian disorders.**
+**Portable motor sensing, voice biomarkers, paired handwriting images and explainable multimodal fusion for screening research.**
 
-> **Project status:** Research and development. This system is **not clinically validated** and must not be used to diagnose patients or guide treatment decisions.
+**Project ID:** J26-IT-401  
+**Module:** Research Project – IT4010  
+**Institution:** Sri Lanka Institute of Information Technology (SLIIT)  
+**Documentation updated:** 30 October 2026
 
-## Overview
+> Research prototype. Component experiments and a synthetic fusion demonstration are available, but the complete system has not been clinically validated. Reported results below refer to different datasets and evaluation protocols; they are not an end-to-end system accuracy.
 
-Parkinsonian disorders can share symptoms such as tremor, slowed movement, altered gait, speech changes, and handwriting difficulties. Evaluating only one symptom or modality may miss important information.
+## Project Overview
 
-This project investigates a **multimodal screening framework** that collects evidence from three assessment components and combines it in a fourth component:
+**Official title:** Development of an Explainable Multimodal Artificial Intelligence Framework for Early Screening of Parkinsonian Disorders Using a Portable Electronic Sensing Device and Mobile Application.
 
-1. **Motor Assessment** — a portable, wrist-worn sensing device captures movement and finger-tapping measurements.
-2. **Voice and Speech Assessment** — speech recordings are analyzed for potentially relevant vocal features.
-3. **Handwriting and Spiral Assessment** — writing and spiral-tracing patterns are analyzed for potential motor abnormalities.
-4. **Prediction Fusion and Explainability** — component outputs are combined to estimate screening probabilities and explain influential features.
+The framework investigates complementary evidence from movement, voice and handwriting. Three assessment components produce modality-specific outputs, and a fourth component studies how to combine them and explain the resulting predictions. A mobile application is intended to guide assessments and support review.
 
-A mobile application is intended to guide assessment sessions, display results, and support clinician review.
+The research targets experimental screening profiles for Parkinson’s disease (PD), essential tremor (ET), cerebellar ataxia (CA), atypical parkinsonism (AP) and dementia with Lewy bodies (DLB). Current motor, voice and handwriting datasets do not collectively establish a real-patient five-condition benchmark. The current five-class fusion experiment uses simulated cases and has no healthy class.
 
-### Target conditions
+## Research Team
 
-The research focuses on screening patterns associated with five conditions:
+| Component | Student | IT number |
+| --- | --- | --- |
+| Motor Assessment | H. N. Dissanayaka | IT23378384 |
+| Voice Assessment | P. B. G. P. N. Wickramasinhe | IT23311404 |
+| Handwriting Assessment | N. A. K. Tharuka | IT23447370 |
+| Explainable Multimodal Fusion | K. M. D. S. Sapnachapa | IT23390614 |
 
-| Abbreviation | Condition |
-| --- | --- |
-| PD | Parkinson's disease |
-| ET | Essential tremor |
-| CA | Cerebellar ataxia |
-| AP | Atypical parkinsonism |
-| DLB | Dementia with Lewy bodies |
-
-**Important:** These conditions have overlapping clinical features, and some are not themselves categorized as Parkinsonian disorders in the same way. The five-class task is an *experimental research objective*, not a clinically established differential-diagnosis tool.
-
-## Research Objectives
-
-- Design a low-cost, portable system for repeatable motor assessments.
-- Extract relevant biomarkers from movement, voice, and handwriting data.
-- Develop task-specific machine-learning models and combine their outputs.
-- Investigate interpretable, potentially calibrated severity indicators and multi-class screening predictions.
-- Provide understandable explanations to support clinician interpretation.
-- Evaluate performance against appropriately labeled datasets and, when approved and feasible, specialist-confirmed clinical data.
+**Main supervisor:** Dr. Kapila Dissanayaka  
+**Co-supervisor:** Mr. Chamindu Rathsara
 
 ## System Architecture
 
 ```mermaid
 flowchart TD
-    P[Participant] --> M[Motor Assessment]
-    P --> V[Voice and Speech Assessment]
-    P --> H[Handwriting and Spiral Assessment]
-
-    subgraph Motor [Portable Motor Sensing]
-        M --> S[MPU-6050 + Capacitive Touch Sensor]
-        S --> E[ESP32 Data Acquisition]
-        E --> B[Bluetooth Low Energy]
-        B --> F[Filtering and Feature Extraction]
-        F --> MS[Motor Severity Features / Scores]
-    end
-
-    V --> VF[Voice Feature Extraction and Model]
-    H --> HF[Handwriting Feature Extraction and Model]
-
-    MS --> X[Multimodal Fusion Model]
-    VF --> X
-    HF --> X
-    X --> R[Experimental Five-Class Screening Output]
-    X --> A[Explainability: SHAP / LIME]
-    R --> APP[Mobile App / Clinician Review]
-    A --> APP
+    A["Guided assessment session"] --> M["Motor: existing wearable and BLE"]
+    A --> V["Voice: WAV recording"]
+    A --> H["Handwriting: spiral and meander images"]
+    M --> MP["Preprocessing and task features"]
+    MP --> MS["TS, BS, RS, GI → proposed MPS"]
+    V --> VS["Acoustic biomarkers → voice score"]
+    H --> HS["Dual-branch CNN → HPS"]
+    MS --> F["Multimodal fusion"]
+    VS --> F
+    HS --> F
+    F --> X["Predictions and SHAP/LIME explanations"]
+    X --> R["Assessment report and intended mobile integration"]
 ```
 
-## Component 1: Motor Assessment
+This diagram describes the intended integration. The PP1 fusion prototype currently receives three supplied scores; live connections to the three assessment components and the shared Android application remain pending.
 
-The motor component uses a portable wearable to capture motion and tapping data during standardized tasks.
+## Current Development Status
 
-### Proposed hardware
+| Area | Available evidence | Remaining work |
+| --- | --- | --- |
+| Motor | Public-data audit, feature extraction, grouped baseline experiments, output schemas and BLE discovery/GATT inspection | Live BLE receiving, clinically referenced task scoring and validated MPS |
+| Voice | Feature extraction, duplicate audit, recorded RF/SVM baselines | Reproduce final deduplicated splits, verify speaker independence and XGBoost, evaluate biomarker fusion |
+| Handwriting | Custom dual-branch CNN, grouped evaluation, Platt score mapping and basic Grad-CAM | Independent calibration checks, quality gate, confidence estimation and fusion integration |
+| Fusion | Reproducible synthetic benchmark, RF/logistic baselines, SHAP/LIME and browser reporting prototype | Aligned real data, learned reliability gate, calibrated outputs and missing-modality inference |
+| Mobile application | Intended assessment and integration workflow | Complete and verify Android/backend integration |
 
-| Component | Purpose |
+## Component 1 — Motor Assessment
+
+### Scope and Device
+
+The portable sensing device is already built by the supervisor. The Motor Assessment responsibility covers obtaining its sensor data through BLE, preprocessing, feature extraction, model development and integration. Hardware assembly and firmware development are outside this component’s current scope unless an interface change is agreed with the supervisor.
+
+The device uses an ESP32-class controller, an MPU-6050 three-axis accelerometer and gyroscope, and a capacitive touch sensor. The intended IMU rate is approximately 100 Hz; processing must use the recording timestamps to check the actual rate.
+
+| Task | Input | Protocol duration | Candidate measurements | Intended score |
+| --- | --- | --- | --- | --- |
+| Tremor | Accelerometer | 10 s | Dynamic acceleration RMS, jerk RMS, peak amplitude | TS, 0–4 |
+| Bradykinesia | Capacitive touch events | 10 s | Tap cadence, inter-tap variability, pauses and slowing | BS, 0–4 |
+| Rigidity-related movement | Gyroscope | 10 s | Cycle peaks and mean peak angular velocity | RS, 0–4 |
+| Gait | Accelerometer | 180 s | Step count, cadence, acceleration RMS and interruptions | GI, 0–4 |
+
+The proposed aggregation is a learned motor model:
+
+\[
+\mathbf{x}_M=[TS,BS,RS,GI],\qquad MPS=f_M(\mathbf{x}_M),\quad MPS\in[0,1].
+\]
+
+The interpretation of MPS must be agreed before fusion. A normalized motor severity score is not automatically a probability of PD. Task-level 0–4 outputs and MPS remain unavailable until their reference labels and calibration are established; the prepared interface represents unavailable values as `null`.
+
+Gyroscope motion is a mobility proxy and does not directly establish clinical passive rigidity. RS requires an appropriate reference protocol and clinician validation.
+
+### Public-Data Development
+
+Previously audited PADS work covered 36 participants, with 12 healthy, 12 PD and 12 heterogeneous “Other” participants. The manifest contained 144 recording entries; 142 recordings were completed and two zero-byte partial files were excluded. Feature extraction produced 28 features per recording. A subsequent timestamp quality gate left 104 eligible recordings.
+
+The corrected format contains a timestamp plus six sensor channels. Sampling frequency is derived per recording. The older starter README’s six-column-only description and unconditional removal of the first 50 samples have been superseded by the later audit.
+
+RF, SVM and XGBoost were compared using participant-grouped development splits. The binary held-out test contained only four participants: two PD and two healthy. Reported participant-level balanced accuracy was RF 0.50, SVM 0.75 and XGBoost 1.00; all had ROC-AUC 1.00 on that very small test. SVM was selected by grouped cross-validation. These are diagnosis-label feasibility results, not TS/BS/RS/GI severity results.
+
+BLE discovery and read-only GATT inspection were prepared. Device service UUIDs, characteristics, payload structure, timestamps, units and notification behaviour still need confirmation before live acquisition. Previously reported automated checks are historical project evidence and were not rerun for this documentation update.
+
+## Component 2 — Voice Assessment
+
+**Individual research:** Multi-Level Voice Biomarker Fusion Framework for Explainable Parkinson’s Disease Assessment.
+
+The voice component investigates three complementary feature groups:
+
+| Group | Examples |
 | --- | --- |
-| ESP32 microcontroller | Sensor acquisition, device control, and BLE communication |
-| MPU-6050 accelerometer and gyroscope | Three-axis linear acceleration and angular velocity measurements |
-| Capacitive touch sensor | Finger-tap event detection |
-| Rechargeable Li-Po battery | Portable power supply |
-| Wrist-worn enclosure / strap | Consistent sensor placement during assessments |
+| Voice quality | Jitter, shimmer and harmonics-to-noise ratio |
+| Spectral | MFCCs and spectral statistics |
+| Prosodic | Pitch statistics, F0 variation and speech timing where available |
 
-**Proposed IMU sampling rate:** 100 Hz. The firmware design uses timed sampling and event-based tap detection.
+The working collection initially contained 1,134 WAV files. Hash auditing found 567 exact duplicate pairs, leaving **567 unique audio files: 287 healthy-labelled and 280 Parkinson-labelled**. Unique audio files do not establish unique speakers. The initial feature export had 1,134 rows and 26 columns and requires a deduplicated export and schema verification.
 
-### Proposed assessment protocol
+The reported workflow uses audio validation, Librosa feature extraction, missing-value checks, and training-only transformations. The candidate models are Random Forest, SVM and XGBoost. Feature-group fusion and SHAP/LIME are research extensions awaiting verified experiments.
 
-| Assessment | Primary Sensor | Duration | Example Feature |
+| Model | Recorded accuracy | Recorded F1 | Evidence status |
 | --- | --- | --- | --- |
-| Tremor | Accelerometer | 10 seconds | RMS dynamic acceleration |
-| Rigidity-related movement | Gyroscope | 10 seconds | Mean peak angular velocity |
-| Bradykinesia / finger tapping | Capacitive touch sensor | 10 seconds | Tap cadence (taps/min) |
-| Gait | Accelerometer | 180 seconds | Estimated step cadence (steps/min) |
+| Random Forest | 95.61% | 0.9565 | Split, duplicate removal and speaker independence require verification |
+| SVM | 93.86% | 0.9369 | Same evaluation limitations |
+| XGBoost | Not verified | Not verified | Final notebook required |
 
-> A gyroscope alone does **not** measure clinical rigidity directly. The rigidity-related task can provide a movement proxy for research, but it cannot replace a clinician's examination. Wrist-based gait estimates also require technical and clinical validation.
+The recorded confusion matrices are RF `[[54, 4], [1, 55]]` and SVM `[[55, 3], [4, 52]]`, each with 114 predictions. These development results cannot establish performance on unseen patients until the partitioning audit is complete. Independent Sinhala speech and recording-device robustness have not been established.
 
-### Motor processing pipeline
+## Component 3 — Handwriting Assessment
 
-1. Acquire IMU and tap signals.
-2. Apply appropriate filtering, gravity compensation, and task segmentation.
-3. Extract features for each motor task.
-4. Estimate task-level indicators using research-defined scoring rules or trained models.
-5. Produce a combined motor representation for the fusion component.
+The component processes a **spiral and meander image pair** from the same participant and repetition. It produces a Handwriting PD Score (HPS) in `[0,1]`. Static images provide visual patterns; pen velocity, acceleration and pressure are not measured.
 
-**Proposed motor output:** tremor score (`TS`), rigidity-related score (`RS`), bradykinesia score (`BS`), gait score (`GS`), and combined motor score (`MS`). The intended range is **0–4** per indicator.
+### Dataset and Model
 
-A proposed weighted aggregation is:
+The final PP1 model uses **NewHandPD: 66 participants, 264 image pairs and 528 images**. There are 35 healthy and 31 PD participants, each contributing four pairs. The development set contains 56 participants and 224 pairs; the held-out set contains 10 participants and 40 pairs.
 
-$$
-MS = w_T TS + w_R RS + w_B BS + w_G GS
-$$
+The model is a custom dual-branch CNN trained from scratch with no pretrained weights. Each branch receives a grayscale `192 × 192` image, learns a 32-value representation, and joins the representations before the sigmoid output. The model has 125,729 parameters. Training uses five-fold participant-grouped cross-validation, fixed 40 epochs, batch size 8, Adam with learning rate `3e-4`, and training-only augmentation.
 
-where the weights are nonnegative and sum to one. Thresholds, weights, and any correspondence to clinical rating scales **must be established and validated**; these experimental scores must not be presented as validated MDS-UPDRS ratings.
+HPS is derived using Platt scaling fitted to development out-of-fold predictions. The raw decision threshold is 0.9341, corresponding to an HPS threshold of 0.4639. The score mapping and threshold still need independent validation; HPS is not established as clinical risk.
 
-## Component 2: Voice and Speech Assessment
+### Reported Results
 
-This component investigates whether recorded speech provides useful complementary signals for screening. The proposed workflow includes:
+| Evaluation | Unit | Accuracy | Balanced accuracy | ROC-AUC |
+| --- | --- | --- | --- | --- |
+| Development OOF | 56 participants | 87.5% | 87.8% | 0.895 |
+| Held-out ensemble | 10 participants | 80.0% | 83.3% | 0.708 |
+| Held-out ensemble | 40 image pairs | 80.0% | 83.3% | 0.755 |
 
-- Guided voice recording through the application.
-- Audio quality checks, noise reduction, and segmentation.
-- Extraction of relevant acoustic and temporal features.
-- Model inference to generate voice-related features or screening outputs for fusion.
+The participant test correctly classified eight of ten participants, finding all four PD cases and flagging two of six healthy participants. The sample is small, and the same held-out participants appeared in earlier experiments. Further tuning requires a new reserved test set.
 
-The exact recording protocol, features, model architecture, and clinical interpretation will be documented as the component is developed.
+Basic Grad-CAM is implemented for both branches. Automated blur/lighting/alignment checks, a confidence estimate, plain-language explanations and score transfer to Component 4 remain planned. Earlier HandPD experiments and pretrained comparisons used a different cohort and do not provide a direct model ranking against the final NewHandPD model.
 
-## Component 3: Handwriting and Spiral Assessment
+## Component 4 — Explainable Multimodal Fusion
 
-This component investigates fine-motor changes using handwriting and spiral-drawing tasks. The proposed workflow includes:
+**Individual research:** Quality-, Uncertainty-, Disagreement- and Availability-Aware Explainable Multimodal Fusion for Robust Parkinsonian Screening.
 
-- Collection of a standardized writing or spiral sample.
-- Image or trace preprocessing.
-- Extraction of shape, smoothness, consistency, and other relevant features.
-- Model inference to produce handwriting-related outputs for fusion.
+The PP1 prototype accepts three numeric, finite scores in `[0,1]`, always ordered as:
 
-The acquisition method and selected features will be finalized and documented during development.
+1. `motor_pd_probability`
+2. `voice_pd_probability`
+3. `handwriting_pd_probability`
 
-## Component 4: Multimodal Fusion and Explainability
+These fields currently contain simulated upstream PD scores. Labels, IDs and generator metadata are excluded from the predictor inputs. The system rejects malformed inputs and returns an incomplete result without prediction when a required score is missing.
 
-The fusion component is intended to integrate outputs from the motor, voice, and handwriting models, then produce an **experimental probability distribution** across the five target conditions.
+### Synthetic Benchmark
 
-Potential explanation methods include:
+The active dataset contains **1,000 simulated cases**, with 200 assigned labels per condition: PD, ET, CA, AP and DLB. Each condition contributes 120 training, 40 validation and 40 test cases, giving a 600/200/200 split.
 
-- **SHAP** — estimates how input features contribute to model outputs.
-- **LIME** — provides local approximations of an individual prediction.
+The scores are generated from assumed profiles with correlated noise. They are not measured patient outputs, and the dataset was not formed by joining different patients from the three upstream datasets.
 
-A credible five-class model requires **appropriately labeled and compatible training/validation data covering all five conditions**. Combining three scores or probabilities does not, by itself, create a validated five-disorder classifier. Probability calibration, missing-modality behavior, and explanations must be evaluated separately.
+The serving baseline is a 240-tree Random Forest with minimum leaf size 6, `max_features=1.0`, balanced class weights and seed 1401. Candidate selection uses validation macro F1, with cross-validation confined to training. A saved score-preprocessing/classifier pipeline supports the browser assessment and printable report demonstration.
 
-## Proposed Technology Stack
+| Model | Synthetic test accuracy | Macro F1 |
+| --- | --- | --- |
+| Random Forest fusion | 85.5% | 0.853 |
+| Logistic regression fusion | 86.5% | 0.864 |
+| Motor score only | 48.5% | 0.479 |
+| Voice score only | 42.5% | 0.427 |
+| Handwriting score only | 39.5% | 0.390 |
 
-| Layer | Proposed Technologies |
+Random Forest classified 171 of 200 synthetic test cases correctly. Logistic regression performed slightly better in this experiment; RF is retained as the PP1 tree-based baseline, not established as the best final model.
+
+| RF robustness condition | Cases | Accuracy | Macro F1 |
+| --- | --- | --- | --- |
+| Separate sample, same moderate generator | 500 | 83.8% | 0.837 |
+| Added score noise, SD 0.10 | 200 | 75.0% | 0.750 |
+| Harder-overlap test | 200 | 62.5% | 0.619 |
+| Wider-overlap imbalanced stress sample | 500 | 52.0% | 0.493 |
+
+TreeSHAP and LIME explain the baseline’s score contributions. A learned reliability gate, measured quality/uncertainty inputs, post-hoc calibration and prediction with missing modalities are not yet implemented. Current disagreement and ambiguity flags are prototype rules.
+
+Planned real-data experiments use aligned multimodal participants from UFNet/PARK, with an exploratory voice/drawing pilot from UT-MoDaPark. Facial-expression inputs in the UFNet/PARK development plan are proxy inputs and must not be described as handwriting. Five-condition validation requires a separately suitable labelled cohort.
+
+## Integration Contract and Score Meaning
+
+The intended upstream notation is **MPS, VPS and HPS**, each in `[0,1]`. A common range does not guarantee a common meaning or calibration.
+
+| Output | Intended meaning | Integration requirement |
+| --- | --- | --- |
+| TS / BS / RS / GI | Task-level motor severity indicators, 0–4 | Clinically referenced task labels and validation |
+| MPS | Proposed Motor Parkinsonism Score, 0–1 | Establish whether it measures severity, resemblance or PD probability |
+| VPS | Voice-derived PD screening score, 0–1 | Verify positive class, speaker-independent evaluation and calibration |
+| HPS | Calibrated handwriting PD-pattern score, 0–1 | Validate calibration and image-quality behaviour independently |
+| Fusion output | Experimental five-class distribution | Retrain and evaluate on compatible aligned outputs; current model is synthetic-trained |
+
+The current fusion API expects PD probability inputs. MPS must not be copied into `motor_pd_probability` merely because its range is `[0,1]`. The team must first agree score semantics and validate any mapping. The same requirement applies to voice and handwriting scores.
+
+Integration should carry participant ID, session ID, modality availability, model/schema versions and genuinely measured quality fields. Unavailable values must remain unavailable rather than being replaced with invented scores. A shared participant/session identity must refer to the same person and assessment context across modalities.
+
+## Technology Stack
+
+| Layer | Reported or intended technologies | Status |
+| --- | --- | --- |
+| Existing wearable | ESP32-class MCU, MPU-6050, capacitive touch sensor | Supervisor-provided device |
+| Motor processing | Python, NumPy, SciPy, scikit-learn, XGBoost | Feature/baseline development reported |
+| BLE tools | Python, Bleak | Discovery/GATT inspection prepared; stream integration pending |
+| Voice | Python, Librosa, scikit-learn, XGBoost | Extraction and partial baseline evidence |
+| Handwriting | Keras custom dual-branch CNN, `.keras` fold models | PP1 implementation reported |
+| Fusion | scikit-learn, joblib, SHAP, LIME | Synthetic PP1 prototype reported |
+| Interface | Browser demonstration; intended shared Android app | Android integration pending |
+| Version control | Git / GitHub | Repository-specific configuration to verify |
+
+## Repository Organization
+
+The following is a **suggested organization**, not a verified listing of the current repository. Preserve the actual existing paths when applying this README.
+
+| Suggested directory | Contents |
 | --- | --- |
-| Wearable hardware | ESP32, MPU-6050, capacitive touch sensor |
-| Embedded firmware | C/C++ using Arduino framework or ESP-IDF |
-| Wireless communication | Bluetooth Low Energy (BLE) |
-| Signal processing | Python, NumPy, SciPy |
-| Machine learning | Python, scikit-learn; additional frameworks if needed |
-| Explainable AI | SHAP, LIME |
-| Application | Mobile application with clinician-facing assessment workflow; implementation framework TBD |
-| Development | Git, GitHub |
+| `motor-assessment/` | BLE tools, sensor preprocessing, task features and motor experiments |
+| `voice-assessment/` | Audio audit, feature extraction and voice experiments |
+| `handwriting-assessment/` | Image pairing, CNN training, calibration and Grad-CAM |
+| `fusion-explainability/` | Score preprocessing, synthetic generator, baselines and explanations |
+| `mobile-app/` | Shared assessment application and integration |
+| `shared/` | Agreed schemas, score definitions and versioned interfaces |
+| `docs/` | Protocols, component reports and evaluation records |
+| `tests/` | Relevant data-integrity, interface and processing checks |
 
-Technology choices may change during experiments and integration.
+## Development and Reproducibility
 
-## Research Datasets
+This README update is based on reports and earlier project records. The current repository source, dependency manifests and entry points were not supplied, so repository-specific installation or launch commands cannot be verified here.
 
-Public datasets are being considered for exploratory analysis, pretraining, and reference measurements. Candidates include:
+To reproduce an experiment from the actual repository:
 
-- **PADS** — Parkinsonian-related sensor and/or assessment research data.
-- **Michael J. Fox Foundation Levodopa Response Study** — a potential source of Parkinson's-related movement measurements, subject to access and suitability.
-- **PhysioNet gait datasets related to Parkinson's disease** — possible gait-pattern references.
+1. Use its recorded dependency file and environment; avoid treating the combined technology table as a single installation manifest.
+2. Obtain each dataset from its authorised source and retain its licence and provenance.
+3. Validate files, labels, participant identities, timestamps or image pairing, and exact duplicates before partitioning.
+4. Freeze participant-grouped development and test partitions wherever participant IDs exist. Record limitations when voice speaker IDs are unavailable.
+5. Fit transformations, augmentation, model selection and calibration using the permitted development partitions only.
+6. Record seeds, configurations, model versions, split manifests, metrics and class order alongside saved models.
+7. Verify score definitions and interface compatibility before testing component integration.
 
-Dataset names, licenses, task definitions, subject labels, sensor placements, and access requirements must be verified before use. These sources may **not** jointly provide sufficient evidence to train or evaluate all five target conditions. Dataset compatibility and leakage prevention are central parts of the research methodology.
+Synthetic training targets must be marked as assumption-based. Public diagnosis labels must not be relabelled as clinical 0–4 motor severity. Augmented variants belong only to training participants, and unrelated cohorts must not be presented as matched multimodal patients.
 
-## Repository Structure
+## Evaluation and Limitations
 
-The following layout is **illustrative**. Update it to reflect the directories that actually exist in this repository.
+- **Motor labels:** Public diagnosis classification does not establish four calibrated motor-severity models.
+- **Voice leakage:** The initial audio inventory contained exact duplicates; final split and speaker independence remain to be verified.
+- **Handwriting sample size:** The held-out result covers only ten participants, and phone-captured drawings remain untested.
+- **Fusion simulation:** Accuracy measures agreement with assigned simulator labels and is sensitive to assumed class profiles and noise.
+- **Unmatched cohorts:** Current upstream datasets contain different participants. Combining their rows cannot create real aligned patient records.
+- **Probability semantics:** Severity scores, PD-pattern scores and calibrated clinical probabilities are different quantities.
+- **Clinical scope:** Current fusion has no healthy class and must not force a real person into one of five diagnoses.
+- **Integration:** No verified end-to-end clinical result or completed Android integration is claimed.
 
-```text
-parkinsonian-disorder-screening-ai/
-├── firmware/                 # ESP32 sensor acquisition and BLE code
-├── motor-assessment/         # Motor signal processing and experiments
-├── voice-assessment/         # Audio processing and experiments
-├── handwriting-assessment/   # Writing / spiral processing and experiments
-├── fusion-explainability/    # Multimodal fusion, SHAP, and LIME
-├── mobile-app/               # Assessment and clinician-review interface
-├── shared/                   # Common schemas and integration utilities
-├── docs/                     # Architecture, protocols, and research notes
-├── tests/                    # Automated and integration tests
-└── README.md
-```
+SHAP, LIME and Grad-CAM describe model behaviour. Their outputs do not establish clinical mechanisms or validate a prediction.
 
-## Getting Started
+## Next Milestones
 
-> The repository's executable setup commands depend on which components have been committed. The steps below are a **development checklist**, not a claim that every directory or dependency file already exists.
+- Complete the BLE stream contract and test acquisition from the existing motor device.
+- Establish independently referenced TS/BS/RS/GI targets and the definition of MPS.
+- Reproduce voice baselines after deduplication and resolve speaker-grouping limitations.
+- Add and evaluate handwriting quality checks, confidence estimates and independent calibration.
+- Agree shared score semantics and participant/session identifiers.
+- Generate leakage-aware aligned real-data predictions for fusion development.
+- Evaluate the proposed reliability gate, calibration and missing-modality handling against the baselines.
+- Connect component inference and reports to the shared application.
+- Perform independently approved clinician-labelled evaluation and report uncertainty.
 
-1. Clone the repository:
+## Documentation Sources
 
-   ```bash
-   git clone https://github.com/<YOUR-USERNAME>/<YOUR-REPOSITORY>.git
-   cd <YOUR-REPOSITORY>
-   ```
+This update draws on the supplied component reports and earlier motor project records:
 
-2. For Python-based components, create a virtual environment:
+1. Voice Assessment Data Analysis Report — IT23311404, updated report supplied for this README.
+2. Component 3 Handwriting Assessment Data Analysis Report — IT23447370, NewHandPD dual-branch CNN prototype.
+3. Component 4 Data Analysis Report — IT23390614, synthetic PP1 fusion implementation and evaluation.
+4. Earlier Motor Assessment audit, feature-extraction, model-comparison and BLE inspection records — IT23378384.
+5. Earlier project `README.md` and `Motor_AI_README.md`, used for documentation structure; superseded descriptions have been updated using later evidence.
 
-   ```bash
-   python -m venv .venv
-   ```
+The uploaded `Motor Assesment - Shortcut(1).lnk` is a shortcut to a Word document, not the document or repository itself. Its target contents were unavailable for this update. Metrics are attributed to the reports and previous records; source code and saved experiments were not rerun or independently audited in this README task.
 
-   Activate it on **Windows**:
+## Responsible Research Use
 
-   ```powershell
-   .venv\Scripts\activate
-   ```
+Use the framework for research and software evaluation. Obtain appropriate consent and approvals before collecting participant data. Keep identifiable records and restricted datasets out of public version control, and respect each dataset’s terms. Dataset licences do not automatically license this repository’s source code; a project code licence must be explicitly selected by the owners.
 
-   Or on **macOS/Linux**:
-
-   ```bash
-   source .venv/bin/activate
-   ```
-
-3. Install dependencies **only where a component's `requirements.txt` exists**:
-
-   ```bash
-   pip install -r path/to/component/requirements.txt
-   ```
-
-4. Build and flash the ESP32 firmware using the toolchain specified in `firmware/` when that code is available.
-5. Follow component-level instructions for data preparation, model training, application startup, and integration as those instructions are added.
-
-**No pretrained clinical model or ready-to-run diagnostic service is supplied by this README.**
-
-## Proposed Evaluation
-
-Evaluation should include:
-
-- **Sensor reliability:** sampling consistency, packet loss, repeatability, and battery/runtime behavior.
-- **Motor assessment:** feature reproducibility and comparison with clinician-rated findings, where appropriate.
-- **Model performance:** class-wise precision, recall, F1-score, confusion matrix, and balanced accuracy.
-- **Probability quality:** calibration measurements, such as Brier score or expected calibration error, when valid probabilities are produced.
-- **Robustness:** testing with missing modalities, recording noise, and differences between subjects or devices.
-- **Clinical validity:** external evaluation on independent, specialist-confirmed cases before any clinical use claim.
-
-Use **subject-level splits** to prevent recordings from the same participant appearing in both training and test sets.
-
-## Data Privacy and Research Ethics
-
-- Obtain required ethics approval and informed consent before collecting participant data.
-- Do not commit identifiable patient recordings, clinical records, credentials, or private datasets to GitHub.
-- Store sensitive data securely with appropriate access controls.
-- Follow dataset-specific licenses, data-use agreements, and institutional research requirements.
-- Clearly communicate that generated scores and predictions are experimental research outputs.
-
-## Current Scope and Limitations
-
-- This is a **research prototype**, not a medical device cleared or approved for clinical use.
-- Public datasets may not adequately represent all five target conditions or real-world clinical populations.
-- Sensor-derived indicators are not automatically equivalent to clinician-observed symptoms.
-- Model explanations do not establish medical causation or guarantee reliable predictions.
-- Clinical validation, calibration, and prospective testing remain necessary.
-
-## Project Information
-
-- **Project:** Explainable Multimodal AI Framework for Early Screening of Parkinsonian Disorders
-- **Academic context:** Final-year research project
-- **Project ID:** J26-IT-401
-- **Institution:** Sri Lanka Institute of Information Technology (SLIIT)
-- **Research areas:** Wearable sensing, signal processing, multimodal machine learning, explainable AI, mobile health
-
-## Contributing
-
-This project is under active academic development. Team members should work on feature branches, document any changes to assessment protocols or data schemas, and submit pull requests for review before merging.
-
-## License
-
-**License not yet specified.** Do not assume that the source code or third-party datasets may be redistributed until the project team chooses a license and confirms all relevant permissions.
-
-## Medical Disclaimer
-
-**For research and educational use only.** This framework is not intended to provide medical advice, establish a diagnosis, replace a neurologist's evaluation, or determine treatment. Anyone with concerning symptoms should seek advice from a qualified healthcare professional.
+**The prototype does not provide a confirmed diagnosis, calibrated patient risk or treatment recommendation.**
